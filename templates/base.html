@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.115.4">
+    <title>{% block title %} {% endblock %}</title>
+    <!--    <link rel="stylesheet" href="{% static 'css/navbar-fixed.css' %}">-->
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        #display-image{
+            width: 400px;
+            height: 225px;
+            border: 1px solid black;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">CRUDS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'create' %}">Create</a>
+                </li>
+            </ul>
+            <form class="d-flex" role="search" method="get" action="{% url 'search' %}">
+                <input class="form-control me-2" type="search" placeholder="Search" name="q" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+{% if messages %}
+{% for m in messages %}
+<div class="alert alert-{{m.tags}}" id="alertMessage">
+    <strong>{{ m }}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+{% block content %} {% endblock content %}
+
+
+
+<!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted fixed-bottom">
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        Copyright &copy; {% now "Y" %}. All right reserved by <a href="https://github.com/srtoslim" target="_blank">SRToslim</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+<!-- Footer -->
+
+<script src="{% static 'js/jquery-3.6.0.js' %}"></script>
+<script src="{% static 'js/jquery-ui.js' %}"></script>
+<script src="{% static 'js/all.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script>
+    $( function() {
+        $( "#dob" ).datepicker({
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,
+            changeYear: true,
+        });
+    });
+
+
+</script>
+<script>
+    const imgInput = document.querySelector("#img-input")
+    const displayImg = document.querySelector("#display-img")
+    imgInput.addEventListener('change',
+    (event)=>{
+        const imgObject = event.target.files[0]
+        displayImg.src = URL.createObjectURL(imgObject)
+    })
+
+
+</script>
+</body>
+</html>
