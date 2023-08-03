@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             name='Customer',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=155, unique=True)),
+                ('name', models.CharField(max_length=155)),
                 ('slug', autoslug.fields.AutoSlugField(blank=True, default=None, editable=False, null=True, populate_from='name', unique=True)),
                 ('email', models.EmailField(max_length=254, unique=True)),
                 ('phone', models.CharField(blank=True, max_length=16, null=True, unique=True)),
